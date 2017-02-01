@@ -120,11 +120,10 @@ public class AuthorContact {
         }
         return true;
     }
-    
+
     @Override
     public String toString() {
         return "AuthorContact{" + "idAuthorContact=" + idAuthorContact + ", idAuthor=" + author + ", contact=" + contact + ", type=" + type + '}';
     }
-    
-    
+
 }

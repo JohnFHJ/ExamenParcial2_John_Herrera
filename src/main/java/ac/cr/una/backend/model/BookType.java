@@ -54,8 +54,8 @@ public class BookType {
     public void setType(String type) {
         this.type = type;
     }
-    
-     @Override
+
+    @Override
     public int hashCode() {
         int hash = 5;
         hash = 89 * hash + this.idType;
@@ -88,6 +88,5 @@ public class BookType {
     public String toString() {
         return "BookType{" + "idType=" + idType + ", type=" + type + '}';
     }
-    
-    
+
 }
