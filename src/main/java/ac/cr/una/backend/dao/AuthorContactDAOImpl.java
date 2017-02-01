@@ -6,6 +6,7 @@
 package ac.cr.una.backend.dao;
 
 import ac.cr.una.backend.model.AuthorContact;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -22,7 +23,7 @@ public class AuthorContactDAOImpl implements AuthorContactDAO {
     public boolean deleteAll() {
         boolean aux = false;
         if (aux == false) {
-            Query query = session.createQuery("truncate table booktype");
+            Query query = session.createQuery("truncate table Booktype");
             query.executeUpdate();
             aux = false;
         }
@@ -39,7 +40,10 @@ public class AuthorContactDAOImpl implements AuthorContactDAO {
 
     @Override
     public List<AuthorContact> findAll() {
-        List<AuthorContact> list = session.createCriteria(AuthorContact.class).list();
-        return list;   
+        List<AuthorContact> citaList = new ArrayList<>();
+
+        citaList = session.createCriteria(AuthorContact.class).list();
+
+        return citaList;
     }
 }

@@ -26,14 +26,14 @@ import javax.ws.rs.core.UriInfo;
  * @author John
  */
 @Path("books")
-public class BookWebservie {
+public class BookWebservice {
 
     private BookDAO bookDAO;
     private BookService bookService;
     @Context
     private UriInfo context;
 
-    public BookWebservie() {
+    public BookWebservice() {
     }
 
     @DELETE
@@ -52,7 +52,7 @@ public class BookWebservie {
     @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Book createAuthor(Book book) {
+    public Book createBook(Book book) {
         bookDAO = new BookDAOImpl();
         bookService = new BookServiceImpl(bookDAO);
 

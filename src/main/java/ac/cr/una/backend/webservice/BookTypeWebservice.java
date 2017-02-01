@@ -17,6 +17,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -26,20 +27,21 @@ import javax.ws.rs.core.UriInfo;
  *
  * @author John
  */
-@Path("BookTypes")
+@Path("booktypes")
 public class BookTypeWebservice {
+
     private BookTypeDAO bookTypeDAO;
     private BookTypeService bookTypeService;
-        @Context
+    @Context
     private UriInfo context;
 
     public BookTypeWebservice() {
     }
-        
-            @GET
-    @Path("/{name}")
+
+    @GET
+    @Path("/{type}")
     @Produces(MediaType.APPLICATION_JSON)
-    public BookType getByName(String name) {
+    public BookType getByName(@PathParam("type") String name) {
         BookType book = new BookType();
         bookTypeDAO = new BookTypeDAOImpl();
         bookTypeService = new BookTypeServiceImpl(bookTypeDAO);
@@ -48,7 +50,7 @@ public class BookTypeWebservice {
 
         return book;
     }
-    
+
     @DELETE
     @Path("/")
     public boolean deleteAll() {
@@ -60,9 +62,8 @@ public class BookTypeWebservice {
 
         return result;
     }
-    
-    
-        @POST
+
+    @POST
     @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

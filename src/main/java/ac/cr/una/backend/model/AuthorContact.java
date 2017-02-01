@@ -87,10 +87,10 @@ public class AuthorContact {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 89 * hash + this.idAuthorContact;
-        hash = 89 * hash + Objects.hashCode(this.author);
-        hash = 89 * hash + Objects.hashCode(this.contact);
-        hash = 89 * hash + Objects.hashCode(this.type);
+        hash = 87 * hash + this.idAuthorContact;
+        hash = 87 * hash + Objects.hashCode(this.author);
+        hash = 87 * hash + Objects.hashCode(this.contact);
+        hash = 87 * hash + Objects.hashCode(this.type);
         return hash;
     }
 

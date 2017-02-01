@@ -6,6 +6,7 @@
 package ac.cr.una.backend.dao;
 
 import ac.cr.una.backend.model.Book;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -22,7 +23,7 @@ public class BookDAOImpl implements BookDAO {
     public boolean deleteAll() {
         boolean aux = false;
         if (aux == false) {
-            Query query = session.createQuery("truncate table booktype");
+            Query query = session.createQuery("truncate table Booktype");
             query.executeUpdate();
             aux = false;
         }
@@ -39,8 +40,11 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public List<Book> findAll() {
-        List<Book> list = session.createCriteria(Book.class).list();
-        return list;
+        List<Book> bookList = new ArrayList<>();
+
+        bookList = session.createCriteria(Book.class).list();
+
+        return bookList;
     }
 
 }

@@ -18,7 +18,7 @@ public class AuthorDAOImpl implements AuthorDAO{
     @Override
     public Author findByName(String name) {
         Author author = null;
-        org.hibernate.Query query = session.createQuery("from Author author where author.name like :name");
+        org.hibernate.Query query = session.createQuery("from Author where name like =:name");
         query.setParameter("name", name + "%");
         if (query.list().size() > 0) {
             author = (Author) query.list().get(0);

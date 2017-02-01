@@ -6,7 +6,6 @@
 package ac.cr.una.backend.dao;
 
 import ac.cr.una.backend.model.BookType;
-import javax.swing.JOptionPane;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -22,7 +21,7 @@ public class BookTypeDAOImpl implements BookTypeDAO {
     public boolean deleteAll() {
         boolean aux = false;
         if (aux == false){
-        Query query = session.createQuery("truncate table booktype");
+        Query query = session.createQuery("truncate table Booktype");
         query.executeUpdate();
         aux = false;
         }
@@ -41,8 +40,8 @@ public class BookTypeDAOImpl implements BookTypeDAO {
     @Override
     public BookType findByName(String name) {
         BookType book = null;
-        org.hibernate.Query query = session.createQuery("from Author author where author.name like :name");
-        query.setParameter("name", name + "%");
+        Query query = session.createQuery("from Author where name like =:name ");
+        query.setParameter("name", name);
         if (query.list().size() > 0) {
             book = (BookType) query.list().get(0);
         }

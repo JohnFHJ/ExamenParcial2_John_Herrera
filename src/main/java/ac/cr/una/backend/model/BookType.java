@@ -58,8 +58,8 @@ public class BookType {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 89 * hash + this.idType;
-        hash = 89 * hash + Objects.hashCode(this.type);
+        hash = 85 * hash + this.idType;
+        hash = 85 * hash + Objects.hashCode(this.type);
         return hash;
     }
 
