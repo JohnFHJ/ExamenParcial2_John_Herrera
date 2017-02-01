@@ -7,12 +7,13 @@
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.password">password</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/progra3</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/progra3_exa2</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="show_sql">true</property>
-        <mapping class="ac.cr.una.backend.model.Student"></mapping>
-        <mapping class="ac.cr.una.backend.model.Empleado"></mapping>
-        <mapping class="ac.cr.una.backend.model.EmpleadoEmail"></mapping>
+        <mapping class="ac.cr.una.backend.model.Author"></mapping>
+        <mapping class="ac.cr.una.backend.model.AuthorContact"></mapping>
+        <mapping class="ac.cr.una.backend.model.Book"></mapping>
+		<mapping class="ac.cr.una.backend.model.BookType"></mapping>
     </session-factory>
 </hibernate-configuration>

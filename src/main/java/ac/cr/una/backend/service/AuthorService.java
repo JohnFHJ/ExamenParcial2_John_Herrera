@@ -16,6 +16,6 @@ import java.util.List;
 public interface AuthorService {
     public boolean deleteAll();
     public AuthorContact save(AuthorContact authorContact);
-    public List<AuthorContact> saveAll();
+    public List<AuthorContact> findAll();
     public Author findByName(String name);
 }

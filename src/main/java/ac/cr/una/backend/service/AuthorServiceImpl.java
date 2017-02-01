@@ -64,7 +64,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<AuthorContact> saveAll() {
+    public List<AuthorContact> findAll() {
         return authorContactDAO.findAll();
     }
 
