@@ -1,7 +1,20 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2017 mguzmana
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * Universidad Nacional de Costa Rica, Prof: Maikol Guzman Alan.
  */
 package ac.cr.una.backend.model;
 
@@ -15,16 +28,15 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 /**
  *
- * @author John
+ * @author mguzmana
  */
 @Entity
-@Table(name = "author_contact", catalog = "progra3_exa2​", uniqueConstraints = {
+@Table(name = "author_contact", catalog = "progra3_exa2", uniqueConstraints = {
     @UniqueConstraint(columnNames = "id_author_contact")})
 public class AuthorContact {
 
@@ -36,10 +48,10 @@ public class AuthorContact {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_author", nullable = false)
     private Author author;
-
+    
     @Column(name = "contact", unique = false, nullable = false)
     private String contact;
-
+    
     @Column(name = "type", unique = false, nullable = false)
     private String type;
 
@@ -61,12 +73,12 @@ public class AuthorContact {
         this.idAuthorContact = idAuthorContact;
     }
 
-    public Author getIdAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setIdAuthor(Author idAuthor) {
-        this.author = idAuthor;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     public String getContact() {
@@ -87,11 +99,11 @@ public class AuthorContact {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 87 * hash + this.idAuthorContact;
-        hash = 87 * hash + Objects.hashCode(this.author);
-        hash = 87 * hash + Objects.hashCode(this.contact);
-        hash = 87 * hash + Objects.hashCode(this.type);
+        int hash = 7;
+        hash = 53 * hash + this.idAuthorContact;
+        hash = 53 * hash + Objects.hashCode(this.author);
+        hash = 53 * hash + Objects.hashCode(this.contact);
+        hash = 53 * hash + Objects.hashCode(this.type);
         return hash;
     }
 
@@ -110,13 +122,13 @@ public class AuthorContact {
         if (this.idAuthorContact != other.idAuthorContact) {
             return false;
         }
-        if (!Objects.equals(this.author, other.author)) {
-            return false;
-        }
         if (!Objects.equals(this.contact, other.contact)) {
             return false;
         }
         if (!Objects.equals(this.type, other.type)) {
+            return false;
+        }
+        if (!Objects.equals(this.author, other.author)) {
             return false;
         }
         return true;
@@ -124,7 +136,7 @@ public class AuthorContact {
 
     @Override
     public String toString() {
-        return "AuthorContact{" + "idAuthorContact=" + idAuthorContact + ", idAuthor=" + author + ", contact=" + contact + ", type=" + type + '}';
+        return "AuthorContact{" + "idAuthorContact=" + idAuthorContact + ", author=" + author + ", contact=" + contact + ", type=" + type + '}';
     }
 
 }
