@@ -34,7 +34,7 @@ public class BookTypeServiceImpl implements BookTypeService {
     }
 
     @Override
-    public BookType findByNames(String name) {
-        return bookTypeDAO.findByName(name);
+    public BookType findByNames(String type) {
+        return bookTypeDAO.findByName(type);
     }
 }

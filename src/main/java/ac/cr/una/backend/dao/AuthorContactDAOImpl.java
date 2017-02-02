@@ -22,11 +22,11 @@ public class AuthorContactDAOImpl implements AuthorContactDAO {
     @Override
     public boolean deleteAll() {
         boolean aux = false;
-        if (aux == false) {
-            Query query = session.createQuery("truncate table Booktype");
-            query.executeUpdate();
-            aux = false;
-        }
+//        if (aux == false) {
+//            Query query = session.createQuery("truncate table Booktype");
+//            query.executeUpdate();
+//            aux = false;
+//        }
         return aux;
     }
 
@@ -40,10 +40,10 @@ public class AuthorContactDAOImpl implements AuthorContactDAO {
 
     @Override
     public List<AuthorContact> findAll() {
-        List<AuthorContact> citaList = new ArrayList<>();
+        List<AuthorContact> authorContactList = new ArrayList<>();
+        session.beginTransaction();
+        authorContactList = session.createCriteria(AuthorContact.class).list();
 
-        citaList = session.createCriteria(AuthorContact.class).list();
-
-        return citaList;
+        return authorContactList;
     }
 }

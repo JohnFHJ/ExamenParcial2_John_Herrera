@@ -14,5 +14,5 @@ import ac.cr.una.backend.model.BookType;
 public interface BookTypeDAO {
     public boolean deleteAll ();
     public BookType save(BookType booktype);
-    public BookType findByName(String name);
+    public BookType findByName(String type);
 }

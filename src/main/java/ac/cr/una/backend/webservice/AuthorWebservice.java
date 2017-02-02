@@ -19,6 +19,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -29,11 +30,12 @@ import javax.ws.rs.core.UriInfo;
  * @author John
  */
 @Path("authors")
-class AuthorWebservice {
+public class AuthorWebservice {
 
     AuthorDAO authorDAO;
     AuthorContactDAO authorContactDAO;
     AuthorService authorService;
+    
     @Context
     private UriInfo context;
 
@@ -53,43 +55,43 @@ class AuthorWebservice {
         return authorList;
 
     }
-
-    @GET
-    @Path("/{name}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Author getAthorByName(String name) {
-        Author author = new Author();
-        authorDAO = new AuthorDAOImpl();
-        authorService = new AuthorServiceImpl(authorDAO);
-
-        author = authorService.findByName(name);
-
-        return author;
-    }
-
-    @DELETE
-    @Path("/")
-    public boolean deleteAll() {
-        boolean result;
-        authorContactDAO = new AuthorContactDAOImpl();
-        authorService = new AuthorServiceImpl(authorContactDAO);
-
-        result = authorService.deleteAll();
-
-        return result;
-    }
-
-    @POST
-    @Path("/")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public AuthorContact createAuthor(AuthorContact authorContact) {
-        authorContactDAO = new AuthorContactDAOImpl();
-        authorService = new AuthorServiceImpl(authorContactDAO);
-
-        authorContact = authorService.save(authorContact);
-
-        return authorContact;
-    }
+//
+//    @GET
+//    @Path("/{name}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Author getAthorByName(@PathParam("name") String name) {
+//        Author author = new Author();
+//        authorDAO = new AuthorDAOImpl();
+//        authorService = new AuthorServiceImpl(authorDAO);
+//
+//        author = authorService.findByName(name);
+//
+//        return author;
+//    }
+//
+//    @DELETE
+//    @Path("/")
+//    public boolean deleteAll() {
+//        boolean result;
+//        authorContactDAO = new AuthorContactDAOImpl();
+//        authorService = new AuthorServiceImpl(authorContactDAO);
+//
+//        result = authorService.deleteAll();
+//
+//        return result;
+//    }
+//
+//    @POST
+//    @Path("/")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public AuthorContact createAuthor(AuthorContact authorContact) {
+//        authorContactDAO = new AuthorContactDAOImpl();
+//        authorService = new AuthorServiceImpl(authorContactDAO);
+//
+//        authorContact = authorService.save(authorContact);
+//
+//        return authorContact;
+//    }
 
 }

@@ -19,16 +19,16 @@ import javax.persistence.UniqueConstraint;
  * @author John
  */
 @Entity
-@Table(name = "booktype", catalog = "progra3_exa2​", uniqueConstraints = {
+@Table(name = "book_type", catalog = "progra3_exa2​", uniqueConstraints = {
     @UniqueConstraint(columnNames = "id_type")})
 public class BookType {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id_type")
+    @Column(name = "id_type", unique = true, nullable = false)
     private int idType;
 
-    @Column(name = "email", unique = false, nullable = false)
+    @Column(name = "type", unique = false, nullable = false)
     private String type;
 
     public BookType() {
@@ -57,7 +57,7 @@ public class BookType {
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 2;
         hash = 85 * hash + this.idType;
         hash = 85 * hash + Objects.hashCode(this.type);
         return hash;

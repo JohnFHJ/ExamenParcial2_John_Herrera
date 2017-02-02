@@ -25,7 +25,7 @@ public class Author {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id_author")
+    @Column(name = "id_author", unique = true, nullable = false)
     private int idAuthor;
 
     @Column(name = "name", unique = false, nullable = false)
@@ -57,7 +57,7 @@ public class Author {
 
     @Override
     public int hashCode() {
-        int hash = 3;
+        int hash = 2;
         hash = 79 * hash + this.idAuthor;
         hash = 79 * hash + Objects.hashCode(this.name);
         return hash;

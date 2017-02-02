@@ -5,10 +5,8 @@
  */
 package ac.cr.una.backend.webservice;
 
-import ac.cr.una.backend.dao.AuthorDAOImpl;
 import ac.cr.una.backend.dao.BookTypeDAO;
 import ac.cr.una.backend.dao.BookTypeDAOImpl;
-import ac.cr.una.backend.model.Book;
 import ac.cr.una.backend.model.BookType;
 import ac.cr.una.backend.service.BookTypeService;
 import ac.cr.una.backend.service.BookTypeServiceImpl;
@@ -32,6 +30,7 @@ public class BookTypeWebservice {
 
     private BookTypeDAO bookTypeDAO;
     private BookTypeService bookTypeService;
+    
     @Context
     private UriInfo context;
 
@@ -41,12 +40,12 @@ public class BookTypeWebservice {
     @GET
     @Path("/{type}")
     @Produces(MediaType.APPLICATION_JSON)
-    public BookType getByName(@PathParam("type") String name) {
-        BookType book = new BookType();
+    public BookType getByName(@PathParam("type") String type) {
+        BookType book = null;
         bookTypeDAO = new BookTypeDAOImpl();
         bookTypeService = new BookTypeServiceImpl(bookTypeDAO);
 
-        book = bookTypeService.findByNames(name);
+        book = bookTypeService.findByNames(type);
 
         return book;
     }

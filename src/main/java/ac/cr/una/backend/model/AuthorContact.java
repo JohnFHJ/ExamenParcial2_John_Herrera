@@ -15,6 +15,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -23,13 +24,13 @@ import javax.persistence.UniqueConstraint;
  * @author John
  */
 @Entity
-@Table(name = "authorcontact", catalog = "progra3_exa2​", uniqueConstraints = {
-    @UniqueConstraint(columnNames = "id_contact")})
+@Table(name = "author_contact", catalog = "progra3_exa2​", uniqueConstraints = {
+    @UniqueConstraint(columnNames = "id_author_contact")})
 public class AuthorContact {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id_contact")
+    @Column(name = "id_author_contact", unique = true, nullable = false)
     private int idAuthorContact;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -109,13 +110,13 @@ public class AuthorContact {
         if (this.idAuthorContact != other.idAuthorContact) {
             return false;
         }
+        if (!Objects.equals(this.author, other.author)) {
+            return false;
+        }
         if (!Objects.equals(this.contact, other.contact)) {
             return false;
         }
         if (!Objects.equals(this.type, other.type)) {
-            return false;
-        }
-        if (!Objects.equals(this.author, other.author)) {
             return false;
         }
         return true;

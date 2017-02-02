@@ -5,10 +5,8 @@
  */
 package ac.cr.una.backend.model;
 
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,10 +14,12 @@ import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  *
@@ -32,23 +32,24 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id_book")
+    @Column(name = "id_book", unique = true, nullable = false)
     private int idBook;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.DELETE})
+    @OneToOne(fetch = FetchType.LAZY)
+    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
     @JoinColumn(name = "id_author", nullable = false)
     private Author author;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.DELETE})
-    @JoinColumn(name = "id_contact", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY)
+    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+    @JoinColumn(name = "id_type", nullable = false)
     private BookType type;
 
     @Column(name = "name", unique = false, nullable = false)
     private String name;
 
-    @Column(name = "dataRelease", unique = false, nullable = false)
+    @Column(name = "date_release", unique = false, nullable = false)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar dataRelease;
 
     @Column(name = "price", unique = false, nullable = false)
@@ -116,13 +117,13 @@ public class Book {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 89 * hash + this.idBook;
-        hash = 89 * hash + Objects.hashCode(this.author);
-        hash = 89 * hash + Objects.hashCode(this.type);
-        hash = 89 * hash + Objects.hashCode(this.name);
-        hash = 89 * hash + Objects.hashCode(this.dataRelease);
-        hash = 89 * hash + Objects.hashCode(this.price);
+        int hash = 6;
+        hash = 98 * hash + this.idBook;
+        hash = 98 * hash + Objects.hashCode(this.author);
+        hash = 98 * hash + Objects.hashCode(this.type);
+        hash = 98 * hash + Objects.hashCode(this.name);
+        hash = 98 * hash + Objects.hashCode(this.dataRelease);
+        hash = 98 * hash + Objects.hashCode(this.price);
         return hash;
     }
 
@@ -141,6 +142,12 @@ public class Book {
         if (this.idBook != other.idBook) {
             return false;
         }
+        if (!Objects.equals(this.author, other.author)) {
+            return false;
+        }
+        if (!Objects.equals(this.type, other.type)) {
+            return false;
+        }
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
@@ -148,12 +155,6 @@ public class Book {
             return false;
         }
         if (!Objects.equals(this.price, other.price)) {
-            return false;
-        }
-        if (!Objects.equals(this.author, other.author)) {
-            return false;
-        }
-        if (!Objects.equals(this.type, other.type)) {
             return false;
         }
         return true;

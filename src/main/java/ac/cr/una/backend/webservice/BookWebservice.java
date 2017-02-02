@@ -30,6 +30,7 @@ public class BookWebservice {
 
     private BookDAO bookDAO;
     private BookService bookService;
+    
     @Context
     private UriInfo context;
 
@@ -64,19 +65,18 @@ public class BookWebservice {
     @GET
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Book> getAllBooks() {
-        List<Book> bookList = null;
+    public List<Book> getAllStudents() {
+        List<Book> studentList = null;
         bookDAO = new BookDAOImpl();
         bookService = new BookServiceImpl(bookDAO);
 
-        bookList = bookService.findAll();
+        studentList = bookService.findAll();
 
-        return bookList;
-
+        return studentList;
     }
 
     @GET
-    @Path("/Total")
+    @Path("/totalprice")
     @Produces(MediaType.APPLICATION_JSON)
     public float getTotalPrice() {
         float aux = 0;

@@ -8,7 +8,6 @@ package ac.cr.una.backend.dao;
 import ac.cr.una.backend.model.Book;
 import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
@@ -22,11 +21,11 @@ public class BookDAOImpl implements BookDAO {
     @Override
     public boolean deleteAll() {
         boolean aux = false;
-        if (aux == false) {
-            Query query = session.createQuery("truncate table Booktype");
-            query.executeUpdate();
-            aux = false;
-        }
+//        if (aux == false) {
+//            Query query = session.createQuery("truncate table Booktype");
+//            query.executeUpdate();
+//            aux = false;
+//        }
         return aux;
     }
 

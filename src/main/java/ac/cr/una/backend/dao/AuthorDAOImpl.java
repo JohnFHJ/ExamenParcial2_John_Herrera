@@ -7,6 +7,7 @@ package ac.cr.una.backend.dao;
 
 import ac.cr.una.backend.model.Author;
 import org.hibernate.Session;
+import org.hibernate.Query;
 
 /**
  *
@@ -18,8 +19,8 @@ public class AuthorDAOImpl implements AuthorDAO{
     @Override
     public Author findByName(String name) {
         Author author = null;
-        org.hibernate.Query query = session.createQuery("from Author where name like =:name");
-        query.setParameter("name", name + "%");
+        Query query = session.createQuery("from Author where name = :name ");
+        query.setParameter("name", name);
         if (query.list().size() > 0) {
             author = (Author) query.list().get(0);
         }

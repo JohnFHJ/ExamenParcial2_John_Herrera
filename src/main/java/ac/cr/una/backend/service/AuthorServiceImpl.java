@@ -10,7 +10,6 @@ import ac.cr.una.backend.dao.AuthorDAO;
 import ac.cr.una.backend.model.Author;
 import ac.cr.una.backend.model.AuthorContact;
 import java.util.List;
-import org.hibernate.Query;
 
 /**
  *

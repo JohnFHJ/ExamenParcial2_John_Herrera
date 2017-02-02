@@ -20,11 +20,11 @@ public class BookTypeDAOImpl implements BookTypeDAO {
     @Override
     public boolean deleteAll() {
         boolean aux = false;
-        if (aux == false){
-        Query query = session.createQuery("truncate table Booktype");
-        query.executeUpdate();
-        aux = false;
-        }
+//        if (aux == false){
+//        Query query = session.createQuery("truncate table Booktype");
+//        query.executeUpdate();
+//        aux = false;
+//        }
         return aux;
     }
     
@@ -38,10 +38,10 @@ public class BookTypeDAOImpl implements BookTypeDAO {
     }
 
     @Override
-    public BookType findByName(String name) {
+    public BookType findByName(String type) {
         BookType book = null;
-        Query query = session.createQuery("from Author where name like =:name ");
-        query.setParameter("name", name);
+        Query query = session.createQuery("from BookType where type = :type ");
+        query.setParameter("type", type);
         if (query.list().size() > 0) {
             book = (BookType) query.list().get(0);
         }
