@@ -8,6 +8,7 @@ package ac.cr.una.backend.dao;
 import ac.cr.una.backend.model.Book;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
@@ -18,17 +19,28 @@ public class BookDAOImpl implements BookDAO {
 
     private final Session session = HibernateUtil.getSessionFactory().openSession();
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean deleteAll() {
         boolean aux = false;
-//        if (aux == false) {
-//            Query query = session.createQuery("truncate table Booktype");
-//            query.executeUpdate();
-//            aux = false;
-//        }
+        List<Book> bookList = findAll();
+        for (Book x : bookList) {
+            session.delete(x);
+            aux = true;
+        }
+        session.getTransaction().commit();
+        
         return aux;
     }
 
+    /**
+     *
+     * @param book
+     * @return
+     */
     @Override
     public Book save(Book book) {
         session.beginTransaction();
@@ -37,6 +49,10 @@ public class BookDAOImpl implements BookDAO {
         return book;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<Book> findAll() {
         List<Book> bookList = new ArrayList<>();

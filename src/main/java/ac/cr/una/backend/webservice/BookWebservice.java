@@ -34,9 +34,16 @@ public class BookWebservice {
     @Context
     private UriInfo context;
 
+    /**
+     *
+     */
     public BookWebservice() {
     }
 
+    /**
+     *
+     * @return
+     */
     @DELETE
     @Path("/")
     public boolean deleteAll() {
@@ -49,6 +56,11 @@ public class BookWebservice {
         return result;
     }
 
+    /**
+     *
+     * @param book
+     * @return
+     */
     @POST
     @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -62,6 +74,10 @@ public class BookWebservice {
         return book;
     }
 
+    /**
+     *
+     * @return
+     */
     @GET
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
@@ -75,19 +91,17 @@ public class BookWebservice {
         return studentList;
     }
 
+    /**
+     *
+     * @return
+     */
     @GET
     @Path("/totalprice")
-    @Produces(MediaType.APPLICATION_JSON)
     public float getTotalPrice() {
         float aux = 0;
-
         bookDAO = new BookDAOImpl();
         bookService = new BookServiceImpl(bookDAO);
-
-        List<Book> books = bookService.findAll();
-        for (int i = 0; books.size() > 0; i++) {
-            aux += books.get(i).getPrice();
-        }
+        aux = bookService.totalPrice();
         return aux;
 
     }

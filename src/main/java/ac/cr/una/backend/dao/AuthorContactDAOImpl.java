@@ -19,17 +19,27 @@ public class AuthorContactDAOImpl implements AuthorContactDAO {
 
     private final Session session = HibernateUtil.getSessionFactory().openSession();
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean deleteAll() {
         boolean aux = false;
-//        if (aux == false) {
-//            Query query = session.createQuery("truncate table Booktype");
-//            query.executeUpdate();
-//            aux = false;
-//        }
+        List<AuthorContact> authorContactList = findAll();
+        for (AuthorContact x : authorContactList) {
+            session.delete(x);
+            aux = true;
+        }
+        session.getTransaction().commit();
         return aux;
     }
 
+    /**
+     *
+     * @param authorContact
+     * @return
+     */
     @Override
     public AuthorContact save(AuthorContact authorContact) {
         session.beginTransaction();
@@ -38,6 +48,10 @@ public class AuthorContactDAOImpl implements AuthorContactDAO {
         return authorContact;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<AuthorContact> findAll() {
         List<AuthorContact> authorContactList = new ArrayList<>();

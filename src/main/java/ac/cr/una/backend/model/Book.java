@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ac.cr.una.backend.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,32 +13,27 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
 import javax.persistence.UniqueConstraint;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 /**
  *
  * @author John
  */
 @Entity
-@Table(name = "book", catalog = "progra3_exa2​", uniqueConstraints = {
+@Table(name = "book", catalog = "progra3_exa2", uniqueConstraints = {
     @UniqueConstraint(columnNames = "id_book")})
-public class Book {
+public class Book implements Serializable {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id_book", unique = true, nullable = false)
+    @Column(name = "id_book", nullable = false)
     private int idBook;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_author", nullable = false)
     private Author author;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_type", nullable = false)
     private BookType type;
 
@@ -49,84 +41,144 @@ public class Book {
     private String name;
 
     @Column(name = "date_release", unique = false, nullable = false)
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Calendar dataRelease;
+    private Calendar dateRelease;
 
     @Column(name = "price", unique = false, nullable = false)
     private float price;
 
+    /**
+     *
+     */
     public Book() {
     }
 
-    public Book(int idBook, Author author, BookType type, String name, Calendar dataRelease, float price) {
-        this.idBook = idBook;
+    /**
+     *
+     * @param author
+     * @param type
+     * @param name
+     * @param dateRelease
+     * @param price
+     */
+    public Book(Author author, BookType type, String name, Calendar dateRelease, float price) {
         this.author = author;
         this.type = type;
         this.name = name;
-        this.dataRelease = dataRelease;
+        this.dateRelease = dateRelease;
         this.price = price;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getIdBook() {
         return idBook;
     }
 
+    /**
+     *
+     * @param idBook
+     */
     public void setIdBook(int idBook) {
         this.idBook = idBook;
     }
 
+    /**
+     *
+     * @return
+     */
     public Author getAuthor() {
         return author;
     }
 
+    /**
+     *
+     * @param author
+     */
     public void setAuthor(Author author) {
         this.author = author;
     }
 
+    /**
+     *
+     * @return
+     */
     public BookType getType() {
         return type;
     }
 
+    /**
+     *
+     * @param type
+     */
     public void setType(BookType type) {
         this.type = type;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
-    public Calendar getDataRelease() {
-        return dataRelease;
+    /**
+     *
+     * @return
+     */
+    public Calendar getDateRelease() {
+        return dateRelease;
     }
 
-    public void setDataRelease(Calendar dataRelease) {
-        this.dataRelease = dataRelease;
+    /**
+     *
+     * @param dateRelease
+     */
+    public void setDateRelease(Calendar dateRelease) {
+        this.dateRelease = dateRelease;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getPrice() {
         return price;
     }
 
+    /**
+     *
+     * @param price
+     */
     public void setPrice(float price) {
         this.price = price;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
-        int hash = 6;
-        hash = 98 * hash + this.idBook;
-        hash = 98 * hash + Objects.hashCode(this.author);
-        hash = 98 * hash + Objects.hashCode(this.type);
-        hash = 98 * hash + Objects.hashCode(this.name);
-        hash = 98 * hash + Objects.hashCode(this.dataRelease);
-        hash = 98 * hash + Objects.hashCode(this.price);
+        int hash = 7;
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -142,26 +194,31 @@ public class Book {
         if (this.idBook != other.idBook) {
             return false;
         }
+        if (Float.floatToIntBits(this.price) != Float.floatToIntBits(other.price)) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
         if (!Objects.equals(this.author, other.author)) {
             return false;
         }
         if (!Objects.equals(this.type, other.type)) {
             return false;
         }
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.dataRelease, other.dataRelease)) {
-            return false;
-        }
-        if (!Objects.equals(this.price, other.price)) {
+        if (!Objects.equals(this.dateRelease, other.dateRelease)) {
             return false;
         }
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
-        return "Book{" + "idBook=" + idBook + ", author=" + author + ", type=" + type + ", name=" + name + ", dataRelease=" + dataRelease + ", price=" + price + '}';
+        return "Book{" + "idBook=" + idBook + ", author=" + author + ", type=" + type + ", name=" + name + ", dateRelease=" + dateRelease + ", price=" + price + '}';
     }
+
 }

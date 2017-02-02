@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ac.cr.una.backend.model;
 
 import java.util.Objects;
@@ -19,7 +14,7 @@ import javax.persistence.UniqueConstraint;
  * @author John
  */
 @Entity
-@Table(name = "book_type", catalog = "progra3_exa2​", uniqueConstraints = {
+@Table(name = "book_type", catalog = "progra3_exa2", uniqueConstraints = {
     @UniqueConstraint(columnNames = "id_type")})
 public class BookType {
 
@@ -28,41 +23,70 @@ public class BookType {
     @Column(name = "id_type", unique = true, nullable = false)
     private int idType;
 
-    @Column(name = "type", unique = false, nullable = false)
+    @Column(name = "type", unique = true, nullable = false)
     private String type;
 
+    /**
+     *
+     */
     public BookType() {
     }
 
-    public BookType(int idType, String type) {
-        this.idType = idType;
+    /**
+     *
+     * @param type
+     */
+    public BookType(String type) {
         this.type = type;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getIdType() {
         return idType;
     }
 
+    /**
+     *
+     * @param idType
+     */
     public void setIdType(int idType) {
         this.idType = idType;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     *
+     * @param type
+     */
     public void setType(String type) {
         this.type = type;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
-        int hash = 2;
-        hash = 85 * hash + this.idType;
-        hash = 85 * hash + Objects.hashCode(this.type);
+        int hash = 7;
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -84,6 +108,10 @@ public class BookType {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "BookType{" + "idType=" + idType + ", type=" + type + '}';

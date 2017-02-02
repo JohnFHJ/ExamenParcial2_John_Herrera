@@ -5,7 +5,9 @@
  */
 package ac.cr.una.backend.dao;
 
+import ac.cr.una.backend.model.AuthorContact;
 import ac.cr.una.backend.model.BookType;
+import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -17,18 +19,27 @@ public class BookTypeDAOImpl implements BookTypeDAO {
 
     private final Session session = HibernateUtil.getSessionFactory().openSession();
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean deleteAll() {
         boolean aux = false;
-//        if (aux == false){
-//        Query query = session.createQuery("truncate table Booktype");
-//        query.executeUpdate();
-//        aux = false;
-//        }
+        List<BookType> bookTypeList = session.createCriteria(BookType.class).list();
+        for (BookType x : bookTypeList) {
+            session.delete(x);
+            aux = true;
+        }
+        session.getTransaction().commit();
         return aux;
     }
     
-
+    /**
+     *
+     * @param booktype
+     * @return
+     */
     @Override
     public BookType save(BookType booktype) {
         session.beginTransaction();
@@ -37,6 +48,11 @@ public class BookTypeDAOImpl implements BookTypeDAO {
         return booktype;
     }
 
+    /**
+     *
+     * @param type
+     * @return
+     */
     @Override
     public BookType findByName(String type) {
         BookType book = null;

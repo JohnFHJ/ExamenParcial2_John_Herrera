@@ -12,7 +12,24 @@ import ac.cr.una.backend.model.BookType;
  * @author John
  */
 public interface BookTypeDAO {
+
+    /**
+     *
+     * @return
+     */
     public boolean deleteAll ();
+
+    /**
+     *
+     * @param booktype
+     * @return
+     */
     public BookType save(BookType booktype);
+
+    /**
+     *
+     * @param type
+     * @return
+     */
     public BookType findByName(String type);
 }
